@@ -1,0 +1,27 @@
+name: marked_text
+description: Interpret text by marking certain sections with specified tokens, allowing for custom callbacks and styling
+version: 0.0.1
+
+platforms:
+    android:
+    ios:
+    linux:
+    macos:
+    windows:
+
+environment:
+    sdk: ">=2.19.4 <3.0.0"
+    flutter: ">=1.17.0"
+
+dependencies:
+    flutter:
+        sdk: flutter
+
+    url_launcher: ^6.1.10
+
+dev_dependencies:
+    flutter_test:
+        sdk: flutter
+    flutter_lints: ^2.0.0
+
+flutter:
