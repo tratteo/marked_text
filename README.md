@@ -1,39 +1,86 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Handle text spans like a pro
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+`marked_text` allows to _mark_ certain sections of text in order to render them differently and attach behaviors with the `GestureRecognizer`
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### Set default options
+
+```dart
+MarkedText.setDefaults({
+      // Make all icons text by default orange
+      "icon": MarkOptions(
+        styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(color: Colors.orange),
+      ),
+      // Make italic text opaque, remember to set it to italic
+      "i": MarkOptions(
+        styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(color: Colors.black54, fontStyle: FontStyle.italic),
+      ),
+      // Make bold text bigger, remember to set it to bold
+      "b": MarkOptions(
+        styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+      )
+});
+```
+
+### Render your text
+
+Define custom marks if needed or use the already implemented one.
+
+```dart
+MarkedText(
+    source: rawStringSource,
+    textAlign: TextAlign.start,
+    marks: [
+    Mark.bold(),
+    Mark.italic(),
+    Mark.link(),
+    Mark.icon(),
+    Mark(
+        id: "custom",
+        options: MarkOptions(
+        onTap: (text, payload) => debugPrint("tapped text $text with payload $payload"),
+        styleBuilder: (context, text, payload, defaultStyle) =>
+            defaultStyle?.copyWith(decoration: TextDecoration.underline, color: Colors.amberAccent),
+        ),
+    ),
+    Mark(
+        id: "longpress",
+        options: MarkOptions(
+        recognizerFactory: (text, payload) => LongPressGestureRecognizer(duration: const Duration(milliseconds: 200))
+            ..onLongPress = () => debugPrint("long pressed text $text with payload $payload"),
+        styleBuilder: (context, text, payload, defaultStyle) =>
+            defaultStyle?.copyWith(decoration: TextDecoration.underline, color: Colors.red),
+        ),
+    )
+    ],
+),
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+The marks `id` define how the mark is identified in the source string.
+The RegExp __must__ contain three named groups and __must__ be limited, that is it has to have symbols that allows to identify the end of the corresponding mark.
 
-```dart
-const like = 'sample';
-```
+* `text` generally the text to be displayed
+* `id` the type (id) used to identify which mark to use
+* `payload` the payload of the mark
 
-## Additional information
+Groups are named, therefore they can be placed in any order in the source string.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+-----
+The default regexp matches the marks in this form:
+
+`${[text]type(payload)}`
+
+It is highly recommended to deeply test the regexp in order to be sure the correct functioning
+  
+The algorithm does the following:
+
+* matches the first mark and extracts its information
+* copies the remaining string after the match
+* repeat
+
+Therefore be sure that the regexp matches only the strict necessary and is able to deterministically stop and the correct spot.
