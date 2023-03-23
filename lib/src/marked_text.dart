@@ -13,16 +13,20 @@ class MarkedText extends StatefulWidget {
     this.defaultStyle,
   });
 
-  static Map<String, MarkOptions> _defaultOptions = Map.identity();
+  static Map<String, MarkOptions> _defaultMarksOptions = Map.identity();
+  static TextStyle? _defaultTextStyle;
 
   /// Set default options for different marks
   ///
   /// Options can be overridden in the definition of any single [Mark]
-  static void setDefaults(Map<String, MarkOptions> defaultOptions) {
-    MarkedText._defaultOptions = defaultOptions;
+  static void setDefaults({TextStyle? textStyle, Map<String, MarkOptions>? marksOptions}) {
+    if (marksOptions != null) {
+      _defaultMarksOptions = marksOptions;
+    }
+    _defaultTextStyle = textStyle;
   }
 
-  static MarkOptions? getDefaultOptionsFor(String id) => _defaultOptions[id];
+  static MarkOptions? getDefaultOptionsFor(String id) => _defaultMarksOptions[id];
 
   /// Override the default regexp for the marked text
   ///
@@ -74,20 +78,13 @@ class _MarkedTextState extends State<MarkedText> {
 
   final List<Object> _tokensMatch = List.empty(growable: true);
 
-  // String _sanitize(String s) {
-  //   return s.replaceAllMapped(
-  //     RegExp(r"\\u([0-9a-fA-F]{4})"),
-  //     (Match m) => String.fromCharCode(int.parse(m.group(1)!, radix: 16)),
-  //   );
-  // }
-
   @override
   void initState() {
     super.initState();
     content = widget.source;
     _tokensMatch.clear();
     _tokensMatch.addAll(_tokenizeRawString());
-    defaultStyle = widget.defaultStyle ?? const TextStyle();
+    defaultStyle = widget.defaultStyle ?? (MarkedText._defaultTextStyle ?? const TextStyle());
   }
 
   List<Object> _tokenizeRawString() {

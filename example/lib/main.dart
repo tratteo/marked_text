@@ -51,20 +51,24 @@ It is also possible to include custom icons in the text using the int code of th
   void initState() {
     super.initState();
     // Set some default options
-    MarkedText.setDefaults({
-      // Make all icons text by default orange
-      "icon": MarkOptions(
-        styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(color: Colors.orange),
-      ),
-      // Make italic text opaque, remember to set it to italic
-      "i": MarkOptions(
-        styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(color: Colors.black54, fontStyle: FontStyle.italic),
-      ),
-      // Make bold text bigger, remember to set it to bold
-      "b": MarkOptions(
-        styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
-      )
-    });
+    MarkedText.setDefaults(
+      textStyle: const TextStyle(color: Colors.white, fontSize: 20),
+      marksOptions: {
+        // Make all icons text by default orange
+        "icon": MarkOptions(
+          styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(color: Colors.orange),
+        ),
+        // Make italic text opaque, remember to set it to italic
+        "i": MarkOptions(
+          styleBuilder: (context, text, payload, defaultStyle) =>
+              defaultStyle?.copyWith(color: Colors.black54, fontStyle: FontStyle.italic),
+        ),
+        // Make bold text bigger, remember to set it to bold
+        "b": MarkOptions(
+          styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+        )
+      },
+    );
   }
 
   @override

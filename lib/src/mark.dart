@@ -16,7 +16,8 @@ class Mark {
     MarkOptions? options,
   }) {
     MarkOptions def = MarkOptions(
-      styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(fontWeight: FontWeight.w600),
+      styleBuilder: (context, text, payload, defaultStyle) =>
+          defaultStyle?.copyWith(fontWeight: FontWeight.w600),
       onTap: (text, payload) async {
         Uri mail = Uri.parse("mailto:$payload?subject=$mailSubject");
         await launchUrl(mail, mode: LaunchMode.platformDefault);
@@ -33,7 +34,8 @@ class Mark {
     MarkOptions? options,
   }) {
     MarkOptions def = MarkOptions(
-      styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(decoration: TextDecoration.underline),
+      styleBuilder: (context, text, payload, defaultStyle) =>
+          defaultStyle?.copyWith(decoration: TextDecoration.underline),
       onTap: (text, payload) async {
         try {
           final url = Uri.parse(payload);
@@ -51,7 +53,8 @@ class Mark {
     MarkOptions? options,
   }) {
     MarkOptions def = MarkOptions(
-      styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(fontWeight: fontWeight ?? FontWeight.bold),
+      styleBuilder: (context, text, payload, defaultStyle) =>
+          defaultStyle?.copyWith(fontWeight: fontWeight ?? FontWeight.bold),
     );
     def = def.copyFrom(MarkedText.getDefaultOptionsFor("b"));
     return Mark(id: "b", options: def.copyFrom(options));
@@ -60,7 +63,8 @@ class Mark {
   /// Create a default bold token with the id `i`
   factory Mark.italic({MarkOptions? options}) {
     MarkOptions def = MarkOptions(
-      styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(fontStyle: FontStyle.italic),
+      styleBuilder: (context, text, payload, defaultStyle) =>
+          defaultStyle?.copyWith(fontStyle: FontStyle.italic),
     );
     def = def.copyFrom(MarkedText.getDefaultOptionsFor("i"));
     return Mark(id: "i", options: def.copyFrom(options));
@@ -73,7 +77,8 @@ class Mark {
   /// Icons: https://api.flutter.dev/flutter/material/Icons-class.html#constants
   factory Mark.icon({
     MarkOptions? options,
-    IconThemeData? Function(BuildContext context, String text, String payload)? iconThemeBuilder,
+    IconThemeData? Function(BuildContext context, String text, String payload)?
+        iconThemeBuilder,
     bool iconBefore = true,
     double spacing = 4,
   }) {

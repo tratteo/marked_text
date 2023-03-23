@@ -13,10 +13,20 @@ class MarkOptions {
   final GestureRecognizer? Function(String text, String payload)? recognizerFactory;
 
   /// Builder for displaying the mark span
-  final InlineSpan Function(BuildContext context, TextSpan markTextSpan, String text, String payload)? spanBuilder;
+  final InlineSpan Function(
+    BuildContext context,
+    TextSpan markTextSpan,
+    String text,
+    String payload,
+  )? spanBuilder;
 
   /// Customize the style of the text
-  final TextStyle? Function(BuildContext context, String text, String payload, TextStyle? defaultStyle)? styleBuilder;
+  final TextStyle? Function(
+    BuildContext context,
+    String text,
+    String payload,
+    TextStyle? defaultStyle,
+  )? styleBuilder;
 
   final Function(String text, String payload)? onTap;
 

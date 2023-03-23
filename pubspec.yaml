@@ -1,6 +1,6 @@
 name: marked_text
 description: Interpret text by marking certain sections with specified tokens, allowing for custom callbacks and styling
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/tratteo/marked_text
 issue_tracker: https://github.com/tratteo/marked_text/issues
 
