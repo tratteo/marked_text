@@ -26,6 +26,8 @@ class MarkedText extends StatefulWidget {
     _defaultTextStyle = textStyle;
   }
 
+  static TextStyle? getDefaultStyle() => _defaultTextStyle;
+
   static MarkOptions? getDefaultOptionsFor(String id) => _defaultMarksOptions[id];
 
   /// Override the default regexp for the marked text
@@ -73,7 +75,7 @@ class _MarkedTextState extends State<MarkedText> {
   );
 
   String content = "";
-  TextStyle? defaultStyle;
+  TextStyle? get defaultStyle => widget.defaultStyle ?? (MarkedText._defaultTextStyle ?? const TextStyle());
   RegExp get regexp => widget.marksRegexp ?? defaultMarksRegexp;
 
   final List<Object> _tokensMatch = List.empty(growable: true);
@@ -84,7 +86,6 @@ class _MarkedTextState extends State<MarkedText> {
     content = widget.source;
     _tokensMatch.clear();
     _tokensMatch.addAll(_tokenizeRawString());
-    defaultStyle = widget.defaultStyle ?? (MarkedText._defaultTextStyle ?? const TextStyle());
   }
 
   List<Object> _tokenizeRawString() {
@@ -142,7 +143,7 @@ class _MarkedTextState extends State<MarkedText> {
           text: text,
           style: markOptions.styleBuilder?.call(context, text, payload, defaultStyle) ?? defaultStyle,
         );
-        return markOptions.spanBuilder != null ? markOptions.spanBuilder!.call(context, span, text, payload) : span;
+        return markOptions.spanBuilder != null ? markOptions.spanBuilder!.call(context, span, text, payload, defaultStyle) : span;
       }
       return const TextSpan(text: "");
     });

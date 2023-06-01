@@ -18,6 +18,7 @@ class MarkOptions {
     TextSpan markTextSpan,
     String text,
     String payload,
+    TextStyle? defaultStyle,
   )? spanBuilder;
 
   /// Customize the style of the text
