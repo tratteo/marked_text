@@ -4,6 +4,9 @@
 
 `marked_text` allows to _mark_ certain sections of text in order to render them differently and attach behaviors with the `GestureRecognizer`
 
+## Building
+Since the package allows to dynamically obtain icons based on their id with the `Mark.icon()`, when building the Flutter application the flag `--no-tree-shake-icons` must be provided.
+
 ## Getting started
 
 ### Set default options
@@ -57,6 +60,12 @@ MarkedText(
     )
     ],
 ),
+```
+
+### Text source
+The following text shows an example on how marks are defined inside a text.
+```txt
+Lorem ${[ipsum]longpress()}, lorem ${[ipsum]i()}, lorem ${[ipsum]b()} 
 ```
 
 ## Usage
