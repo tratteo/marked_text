@@ -60,13 +60,12 @@ It is also possible to include custom icons in the text using the int code of th
         ),
         // Make italic text opaque, remember to set it to italic
         "i": MarkOptions(
-          styleBuilder: (context, text, payload, defaultStyle) =>
-              defaultStyle?.copyWith(color: Colors.black54, fontStyle: FontStyle.italic),
+          styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(color: Colors.black54, fontStyle: FontStyle.italic),
         ),
         // Make bold text bigger, remember to set it to bold
         "b": MarkOptions(
           styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
-        )
+        ),
       },
     );
   }
@@ -91,19 +90,17 @@ It is also possible to include custom icons in the text using the int code of th
               id: "custom",
               options: MarkOptions(
                 onTap: (text, payload) => debugPrint("tapped text $text with payload $payload"),
-                styleBuilder: (context, text, payload, defaultStyle) =>
-                    defaultStyle?.copyWith(decoration: TextDecoration.underline, color: Colors.amberAccent),
+                styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(decoration: TextDecoration.underline, color: Colors.amberAccent),
               ),
             ),
             Mark(
               id: "longpress",
               options: MarkOptions(
-                recognizerFactory: (text, payload) => LongPressGestureRecognizer(duration: const Duration(milliseconds: 200))
-                  ..onLongPress = () => debugPrint("long pressed text $text with payload $payload"),
-                styleBuilder: (context, text, payload, defaultStyle) =>
-                    defaultStyle?.copyWith(decoration: TextDecoration.underline, color: Colors.red),
+                recognizerFactory: (text, payload) =>
+                    LongPressGestureRecognizer(duration: const Duration(milliseconds: 200))..onLongPress = () => debugPrint("long pressed text $text with payload $payload"),
+                styleBuilder: (context, text, payload, defaultStyle) => defaultStyle?.copyWith(decoration: TextDecoration.underline, color: Colors.red),
               ),
-            )
+            ),
           ],
         ),
       ),

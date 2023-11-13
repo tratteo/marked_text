@@ -83,9 +83,21 @@ class _MarkedTextState extends State<MarkedText> {
   @override
   void initState() {
     super.initState();
+    _fetchTokens();
+  }
+
+  void _fetchTokens() {
     content = widget.source;
     _tokensMatch.clear();
     _tokensMatch.addAll(_tokenizeRawString());
+  }
+
+  @override
+  void didUpdateWidget(MarkedText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.source != widget.source) {
+      _fetchTokens();
+    }
   }
 
   List<Object> _tokenizeRawString() {

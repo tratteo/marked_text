@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
+-   Solved a small issue that caused the `MarkedText` widget to not be updated when the hot reload was executed
+
 ## 0.0.4
 
 -   Added the `defaultStyle` field to the `spanBuilder`, so that spans can now receive as input the current style

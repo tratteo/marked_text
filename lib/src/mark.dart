@@ -75,6 +75,9 @@ class Mark {
     MarkOptions? options,
     IconThemeData? Function(BuildContext context, String text, String payload)? iconThemeBuilder,
     bool iconBefore = true,
+    WrapCrossAlignment crossAlignment = WrapCrossAlignment.center,
+    WrapAlignment alignment = WrapAlignment.center,
+    PlaceholderAlignment placeholderAlignment = PlaceholderAlignment.bottom,
     double spacing = 4,
   }) {
     MarkOptions def = MarkOptions(
@@ -97,12 +100,13 @@ class Mark {
         ];
         return WidgetSpan(
           child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            runAlignment: WrapAlignment.center,
+            crossAxisAlignment: crossAlignment,
+            runAlignment: alignment,
             spacing: spacing,
             children: iconBefore ? elems : elems.reversed.toList(),
           ),
-          alignment: PlaceholderAlignment.middle,
+          baseline: TextBaseline.alphabetic,
+          alignment: placeholderAlignment,
         );
       },
     );

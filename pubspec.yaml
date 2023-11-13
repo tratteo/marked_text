@@ -1,6 +1,6 @@
 name: marked_text
 description: Interpret text by marking certain sections with specified tokens, allowing for custom callbacks and styling
-version: 0.0.4
+version: 0.0.5
 repository: https://github.com/tratteo/marked_text
 issue_tracker: https://github.com/tratteo/marked_text/issues
 
@@ -24,6 +24,6 @@ dependencies:
 dev_dependencies:
     flutter_test:
         sdk: flutter
-    flutter_lints: ^2.0.0
+    flutter_lints: ^3.0.1
 
 flutter:
