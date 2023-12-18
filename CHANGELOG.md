@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.6
+
+-   The marked text now internally has a map of all the Material Icons. This means that there is not the necessity to build with `--no-tree-shake-icons`
+
 ## 0.0.5
 
 -   Solved a small issue that caused the `MarkedText` widget to not be updated when the hot reload was executed

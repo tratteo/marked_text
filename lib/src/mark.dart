@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:marked_text/marked_text.dart";
+import "package:marked_text/src/gen/material_icons_g.dart";
 import "package:url_launcher/url_launcher.dart";
 
 class Mark {
@@ -83,11 +84,22 @@ class Mark {
     MarkOptions def = MarkOptions(
       spanBuilder: (context, tokenSpan, text, payload, defaultStyle) {
         var theme = iconThemeBuilder?.call(context, text, payload);
-        int? iconData = int.tryParse(payload);
+        int? iconHex = int.tryParse(payload);
         var elems = <Widget>[
-          if (iconData != null)
+          if (iconHex != null)
             Icon(
-              IconData(iconData, fontFamily: "MaterialIcons"),
+              materialIconsHexMap[iconHex],
+              color: theme?.color,
+              fill: theme?.fill,
+              grade: theme?.grade,
+              opticalSize: theme?.opticalSize,
+              weight: theme?.weight,
+              shadows: theme?.shadows,
+              size: theme?.size ?? 16,
+            )
+          else if (materialIconsNameMap.containsKey(payload))
+            Icon(
+              materialIconsNameMap[payload],
               color: theme?.color,
               fill: theme?.fill,
               grade: theme?.grade,

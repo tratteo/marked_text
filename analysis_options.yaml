@@ -1,7 +1,7 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-
+    exclude: ["lib/src/gen/**"]
 linter:
     rules:
         always_use_package_imports: true
