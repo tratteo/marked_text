@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+-   Bump dependencies
+
 ## 0.0.6
 
 -   The marked text now internally has a map of all the Material Icons. This means that there is not the necessity to build with `--no-tree-shake-icons`
