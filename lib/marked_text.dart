@@ -1,4 +1,4 @@
-library marked_text;
+library;
 
 export "package:marked_text/src/mark.dart";
 export "package:marked_text/src/mark_options.dart";
